@@ -38,6 +38,11 @@ namespace Modulzaro
             Hibrid = hibrid;
             Csuklos = csuklos;
         }
-       
+
+        public override float AktualisAr()
+        {
+            return (1 / FutottKm) * (FerohelyekSzama + AjtokSzama);
+        }
+
     }
 }

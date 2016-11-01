@@ -55,5 +55,10 @@ namespace Modulzaro
             this.sinszelesseg = sinszelesseg;
             this.aramellatas = aramellatas;
         }
+
+        public override float AktualisAr()
+        {
+            return (1 / FutottKm) * Sinszelesseg;
+        }
     }
 }

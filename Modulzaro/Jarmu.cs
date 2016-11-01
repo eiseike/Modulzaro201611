@@ -125,5 +125,8 @@ namespace Modulzaro
             this.ajtokSzama = ajtokSzama;
             this.ferohelyekSzama = ferohelyekSzama;
         }
+
+        public abstract float AktualisAr();
+
     }
 }

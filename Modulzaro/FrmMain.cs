@@ -12,9 +12,36 @@ namespace Modulzaro
 {
     public partial class FrmMain : Form
     {
+        LancoltLista<Jarmu> lista;
+        //SajatLista lista;
+        Image ikon;
+
         public FrmMain()
         {
             InitializeComponent();
+            lista = new LancoltLista<Jarmu>();
         }
+
+        private void btnUjJarmu_Click(object sender, EventArgs e)
+        {
+            FrmJarmuvek dialogus = new FrmJarmuvek(); 
+            if (dialogus.ShowDialog() == DialogResult.OK)
+            {
+                lista.Beszur(dialogus.UjJarmu);
+                //lista.Add(dialogus.UjTermek);
+                LsbRefresh();
+            }
+        }
+
+        private void LsbRefresh()
+        {
+
+            lsbJarmuvek.Items.Clear();
+            foreach (Jarmu item in lista)
+            {
+                lsbJarmuvek.Items.Add(item);
+            }
+        }
+
     }
 }

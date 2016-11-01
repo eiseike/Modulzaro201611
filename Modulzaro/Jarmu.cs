@@ -3,10 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace Modulzaro
 {
-    abstract class Jarmu
+
+    delegate bool EldontoFuggvenyTarolo(Jarmu jarmu);
+
+    abstract class Jarmu : IComparable
     {
         private string nev;
         private string azonosito;
@@ -127,6 +131,32 @@ namespace Modulzaro
         }
 
         public abstract float AktualisAr();
+
+
+        public override string ToString()
+        {
+            return nev + " - " + azonosito;
+        }
+
+        public int CompareTo(object obj)
+        {
+            if (obj is Jarmu)
+            {
+                if (this.azonosito.CompareTo((obj as Jarmu).azonosito) == -1)
+                {
+                    return -1;
+                }
+                else if (this.azonosito.CompareTo((obj as Jarmu).azonosito) == 1)
+                {
+                    return 1;
+                }
+                return 0;
+            }
+            else
+            {
+                throw new ArgumentException("Nem megfelelő a bemeneti paraméter típusa!");
+            }
+        }
 
     }
 }

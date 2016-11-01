@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,6 +8,17 @@ using System.Xml.Linq;
 
 namespace Modulzaro
 {
+
+
+    enum JarmuTipusok
+    {
+        [Description("1. Kategória - Busz")]
+        Busz,
+        [Description("2. Kategória - Villamos")]
+        Villamos,
+        [Description("3. Kategória - Metró")]
+        Metró,
+    }
 
     delegate bool EldontoFuggvenyTarolo(Jarmu jarmu);
 
@@ -123,11 +135,11 @@ namespace Modulzaro
     
         public Jarmu(string nev, string azonosito, int futottKm, int ajtokSzama, int ferohelyekSzama)
         {
-            this.nev = nev;
-            this.azonosito = azonosito;
-            this.futottKm = futottKm;
-            this.ajtokSzama = ajtokSzama;
-            this.ferohelyekSzama = ferohelyekSzama;
+            Nev = nev;
+            Azonosito = azonosito;
+            FutottKm = futottKm;
+            AjtokSzama = ajtokSzama;
+            FerohelyekSzama = ferohelyekSzama;
         }
 
         public abstract float AktualisAr();

@@ -11,7 +11,7 @@ namespace Modulzaro
         public bool EgybeNyitott { get; set; }
 
 
-        public Villamos(string nev, string azonosito, int futottKm, int ajtokSzama, int ferohelyekSzama, int sinszelesseg, Aramellatas aramellatas, bool egybeNyitott) : base(nev, azonosito, futottKm, ajtokSzama, ferohelyekSzama, sinszelesseg, aramellatas)
+        public Villamos(string nev, string azonosito, int futottKm, int ajtokSzama, int ferohelyekSzama, int sinszelesseg, AramellatasTipusok aramellatasTipusok, bool egybeNyitott) : base(nev, azonosito, futottKm, ajtokSzama, ferohelyekSzama, sinszelesseg, aramellatasTipusok)
         {
             EgybeNyitott = egybeNyitott;
         }

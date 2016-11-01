@@ -30,8 +30,10 @@
         {
             this.lsbJarmuvek = new System.Windows.Forms.ListBox();
             this.btnSzures = new System.Windows.Forms.Button();
-            this.btnJarmuTorol = new System.Windows.Forms.Button();
+            this.btnTorolJarmu = new System.Windows.Forms.Button();
             this.btnUjJarmu = new System.Windows.Forms.Button();
+            this.btnShowJarmu = new System.Windows.Forms.Button();
+            this.btnModJarmu = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lsbJarmuvek
@@ -44,21 +46,22 @@
             // 
             // btnSzures
             // 
-            this.btnSzures.Location = new System.Drawing.Point(13, 366);
+            this.btnSzures.Location = new System.Drawing.Point(11, 444);
             this.btnSzures.Name = "btnSzures";
             this.btnSzures.Size = new System.Drawing.Size(224, 30);
             this.btnSzures.TabIndex = 14;
             this.btnSzures.Text = "Szűrés";
             this.btnSzures.UseVisualStyleBackColor = true;
             // 
-            // btnJarmuTorol
+            // btnTorolJarmu
             // 
-            this.btnJarmuTorol.Location = new System.Drawing.Point(13, 330);
-            this.btnJarmuTorol.Name = "btnJarmuTorol";
-            this.btnJarmuTorol.Size = new System.Drawing.Size(224, 30);
-            this.btnJarmuTorol.TabIndex = 13;
-            this.btnJarmuTorol.Text = "Jármü törlés";
-            this.btnJarmuTorol.UseVisualStyleBackColor = true;
+            this.btnTorolJarmu.Location = new System.Drawing.Point(11, 408);
+            this.btnTorolJarmu.Name = "btnTorolJarmu";
+            this.btnTorolJarmu.Size = new System.Drawing.Size(224, 30);
+            this.btnTorolJarmu.TabIndex = 13;
+            this.btnTorolJarmu.Text = "Jármü törlés";
+            this.btnTorolJarmu.UseVisualStyleBackColor = true;
+            this.btnTorolJarmu.Click += new System.EventHandler(this.btnTorolJarmu_Click);
             // 
             // btnUjJarmu
             // 
@@ -70,13 +73,35 @@
             this.btnUjJarmu.UseVisualStyleBackColor = true;
             this.btnUjJarmu.Click += new System.EventHandler(this.btnUjJarmu_Click);
             // 
+            // btnShowJarmu
+            // 
+            this.btnShowJarmu.Location = new System.Drawing.Point(12, 331);
+            this.btnShowJarmu.Name = "btnShowJarmu";
+            this.btnShowJarmu.Size = new System.Drawing.Size(224, 30);
+            this.btnShowJarmu.TabIndex = 13;
+            this.btnShowJarmu.Text = "Jármü adatai";
+            this.btnShowJarmu.UseVisualStyleBackColor = true;
+            this.btnShowJarmu.Click += new System.EventHandler(this.btnShowJarmu_Click);
+            // 
+            // btnModJarmu
+            // 
+            this.btnModJarmu.Location = new System.Drawing.Point(11, 367);
+            this.btnModJarmu.Name = "btnModJarmu";
+            this.btnModJarmu.Size = new System.Drawing.Size(224, 30);
+            this.btnModJarmu.TabIndex = 13;
+            this.btnModJarmu.Text = "Jármü módósítása";
+            this.btnModJarmu.UseVisualStyleBackColor = true;
+            this.btnModJarmu.Click += new System.EventHandler(this.btnModJarmu_Click);
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(255, 407);
+            this.ClientSize = new System.Drawing.Size(255, 478);
             this.Controls.Add(this.btnSzures);
-            this.Controls.Add(this.btnJarmuTorol);
+            this.Controls.Add(this.btnModJarmu);
+            this.Controls.Add(this.btnShowJarmu);
+            this.Controls.Add(this.btnTorolJarmu);
             this.Controls.Add(this.btnUjJarmu);
             this.Controls.Add(this.lsbJarmuvek);
             this.Name = "FrmMain";
@@ -89,8 +114,10 @@
 
         private System.Windows.Forms.ListBox lsbJarmuvek;
         private System.Windows.Forms.Button btnSzures;
-        private System.Windows.Forms.Button btnJarmuTorol;
+        private System.Windows.Forms.Button btnTorolJarmu;
         private System.Windows.Forms.Button btnUjJarmu;
+        private System.Windows.Forms.Button btnShowJarmu;
+        private System.Windows.Forms.Button btnModJarmu;
     }
 }
 

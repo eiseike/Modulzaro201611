@@ -31,9 +31,9 @@ namespace Modulzaro
             }
         }
 
-        public Metro(string nev, string azonosito, int futottKm, int ajtokSzama, int ferohelyekSzama, int sinszelesseg, Aramellatas aramellatas, int szerelveny) : base(nev, azonosito, futottKm, ajtokSzama, ferohelyekSzama, sinszelesseg, aramellatas)
+        public Metro(string nev, string azonosito, int futottKm, int ajtokSzama, int ferohelyekSzama, int sinszelesseg, AramellatasTipusok aramellatasTipusok, int szerelveny) : base(nev, azonosito, futottKm, ajtokSzama, ferohelyekSzama, sinszelesseg, aramellatasTipusok)
         {
-            this.szerelveny = szerelveny;
+            Szerelveny = szerelveny;
         }
     }
 }

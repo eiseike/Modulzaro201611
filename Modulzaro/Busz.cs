@@ -34,7 +34,7 @@ namespace Modulzaro
 
         public Busz(string nev, string azonosito, int futottKm, int ajtokSzama, int ferohelyekSzama, int tankUrtartalom, bool hibrid, bool csuklos) : base(nev, azonosito, futottKm, ajtokSzama, ferohelyekSzama)
         {
-            this.tankUrtartalom = tankUrtartalom;
+            TankUrtartalom = tankUrtartalom;
             Hibrid = hibrid;
             Csuklos = csuklos;
         }

@@ -11,37 +11,134 @@ using System.Windows.Forms;
 namespace Modulzaro
 {
 
-    enum Jarmuvek
-    {
-        [Description("1. Kategória - Busz")]
-        Busz,
-        [Description("2. Kategória - Villamos")]
-        Pékáru,
-        [Description("3. Kategória - Metró")]
-        Tisztítószer,
-    }
     public partial class FrmJarmuvek : Form
     {
         private Jarmu ujJarmu;
-
-        public FrmJarmuvek()
-        {
-            InitializeComponent();
-
-            cmbJarmuKategoria.DataSource = Enum.GetValues(typeof(Jarmuvek)).Cast<Enum>().Select(value => new
-            {
-                (Attribute.GetCustomAttribute(value.GetType().GetField(value.ToString()), typeof(DescriptionAttribute)) as DescriptionAttribute).Description,
-                value
-            }).OrderBy(item => item.value).ToList();
-            cmbJarmuKategoria.DisplayMember = "Description";
-            cmbJarmuKategoria.ValueMember = "value";
-        }
 
         internal Jarmu UjJarmu
         {
             get
             {
                 return ujJarmu;
+            }
+
+            set
+            {
+                ujJarmu = value;
+            }
+        }
+
+        public FrmJarmuvek()
+        {
+            _init();
+            UjJarmu = null;
+
+        }
+
+        internal FrmJarmuvek(Jarmu jarmu, bool leselkedem=false)
+        {
+            _init();
+            UjJarmu = jarmu;
+            txtNev.Text = UjJarmu.Nev;
+            txtAzonosito.Text = UjJarmu.Azonosito;
+            nudFutottKM.Value = UjJarmu.FutottKm;
+            nudAjtokSzama.Value = UjJarmu.AjtokSzama;
+            nudFerohelyekSzama.Value = UjJarmu.FerohelyekSzama;
+            
+            if (UjJarmu is Busz)
+            {
+                cmbJarmuKategoria.SelectedIndex = (int)JarmuTipusok.Busz;
+                nudTankUrtartalom.Value = (UjJarmu as Busz).TankUrtartalom;
+                cboHibrid.Checked = (UjJarmu as Busz).Hibrid;
+                cboCsuklos.Checked = (UjJarmu as Busz).Csuklos;
+            }
+            else if (UjJarmu is Kotottpalyas)
+            {
+                nudSinszelesseg.Value = (UjJarmu as Kotottpalyas).Sinszelesseg;
+                cmbAramellatasTipusa.SelectedIndex = (int)(UjJarmu as Kotottpalyas).Aramellatas;
+
+                if (UjJarmu is Villamos)
+                {
+                    cmbJarmuKategoria.SelectedIndex = (int)JarmuTipusok.Villamos;
+                    cboEgybeNyitott.Checked = (UjJarmu as Villamos).EgybeNyitott;
+                }
+                else if (UjJarmu is Metro)
+                {
+                    cmbJarmuKategoria.SelectedIndex = (int)JarmuTipusok.Metró;
+                    nudSzerelveny.Value = (UjJarmu as Metro).Szerelveny;
+                }
+            }
+
+            if (leselkedem == true)
+            {
+                foreach (Control itemControl in Controls)
+                {
+                    itemControl.Enabled = false;
+                }
+            }
+            
+        }
+
+        private void _init()
+        {
+            InitializeComponent();
+
+            cmbJarmuKategoria.DataSource = Enum.GetValues(typeof(JarmuTipusok)).Cast<Enum>().Select(value => new
+            {
+                (Attribute.GetCustomAttribute(value.GetType().GetField(value.ToString()), typeof(DescriptionAttribute)) as DescriptionAttribute).Description,
+                value
+            }).OrderBy(item => item.value).ToList();
+            cmbJarmuKategoria.DisplayMember = "Description";
+            cmbJarmuKategoria.ValueMember = "value";
+
+            cmbAramellatasTipusa.DataSource = Enum.GetValues(typeof(AramellatasTipusok)).Cast<Enum>().Select(value => new
+            {
+                (Attribute.GetCustomAttribute(value.GetType().GetField(value.ToString()), typeof(DescriptionAttribute)) as DescriptionAttribute).Description,
+                value
+            }).OrderBy(item => item.value).ToList();
+            cmbAramellatasTipusa.DisplayMember = "Description";
+            cmbAramellatasTipusa.ValueMember = "value";
+        }
+
+        
+        private void btnOK_Click(object sender, EventArgs e)
+        {
+
+            try
+            {
+               
+
+                switch ((JarmuTipusok) cmbJarmuKategoria.SelectedIndex)
+                {
+                    case JarmuTipusok.Busz:
+                        //Busz
+                        UjJarmu = new Busz(txtNev.Text.Trim(), txtAzonosito.Text.Trim(), (int) (nudFutottKM.Value),
+                            (int) (nudAjtokSzama.Value), (int) (nudFerohelyekSzama.Value),
+                            (int) (nudTankUrtartalom.Value), cboHibrid.Checked, cboCsuklos.Checked);
+
+                        break;
+                    case JarmuTipusok.Villamos:
+                        //Villamos
+                        UjJarmu = new Villamos(
+                            txtNev.Text.Trim(), txtAzonosito.Text.Trim(), (int) (nudFutottKM.Value),
+                            (int) (nudAjtokSzama.Value), (int) (nudFerohelyekSzama.Value),
+                            (int) (nudSinszelesseg.Value), (AramellatasTipusok)cmbAramellatasTipusa.SelectedIndex,
+                            cboEgybeNyitott.Checked);
+                        break;
+                    case JarmuTipusok.Metró:
+                        //Metró
+                        UjJarmu = new Metro(txtNev.Text.Trim(), txtAzonosito.Text.Trim(), (int) (nudFutottKM.Value),
+                            (int) (nudAjtokSzama.Value), (int) (nudFerohelyekSzama.Value),
+                            (int) (nudSinszelesseg.Value), (AramellatasTipusok)cmbAramellatasTipusa.SelectedIndex,
+                            (int) nudSzerelveny.Value);
+                        break;
+                }
+               
+            }
+            catch (ArgumentException ex)
+            {
+                MessageBox.Show(ex.Message, "Hiba...", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                DialogResult = DialogResult.None;
             }
         }
     }

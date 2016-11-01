@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Modulzaro
 {
-    class SajatLista : List<Jarmu>
+    internal class SajatLista<Jarmu> : List<Jarmu>
     {
         public delegate void HozzaadasEsemenyKezelo(Jarmu uj);
         public event HozzaadasEsemenyKezelo Hozzaadas;
@@ -18,10 +19,12 @@ namespace Modulzaro
             base.Add(item);
             Hozzaadas?.Invoke(item);
         }
-        public new void Remove(Jarmu item)
-        {
-            base.Remove(item);
-            Elvetel?.Invoke(item);
+
+       
+        public void RemoveAt(int index, object jarmu)
+        {   
+            base.RemoveAt(index);
+            Elvetel?.Invoke((Jarmu)jarmu);
         }
 
     }

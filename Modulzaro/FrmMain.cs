@@ -12,14 +12,14 @@ namespace Modulzaro
 {
     public partial class FrmMain : Form
     {
-        LancoltLista<Jarmu> lista;
-        //SajatLista lista;
+       
+        SajatLista<Jarmu> lista;
         Image ikon;
 
         public FrmMain()
         {
             InitializeComponent();
-            lista = new LancoltLista<Jarmu>();
+            lista = new SajatLista<Jarmu>();
         }
 
         private void btnUjJarmu_Click(object sender, EventArgs e)
@@ -27,8 +27,7 @@ namespace Modulzaro
             FrmJarmuvek dialogus = new FrmJarmuvek(); 
             if (dialogus.ShowDialog() == DialogResult.OK)
             {
-                lista.Beszur(dialogus.UjJarmu);
-                //lista.Add(dialogus.UjTermek);
+                lista.Add(dialogus.UjJarmu);
                 LsbRefresh();
             }
         }
@@ -43,5 +42,46 @@ namespace Modulzaro
             }
         }
 
+        private void btnTorolJarmu_Click(object sender, EventArgs e)
+        {
+            if (lsbJarmuvek.SelectedIndex != -1 && MessageBox.Show("Valóban törölni szeretné a kiválasztott terméket?", "Törlés...", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
+            {
+                lista.RemoveAt(lsbJarmuvek.SelectedIndex , lsbJarmuvek.SelectedItem as Jarmu);
+                LsbRefresh();
+            }
+        }
+
+        private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (
+                MessageBox.Show("Valóban ki akar lépni?", "Kilépés...", MessageBoxButtons.OKCancel,
+                    MessageBoxIcon.Question) != DialogResult.OK)
+            {
+                e.Cancel = true;
+            }
+        }
+
+        private void btnShowJarmu_Click(object sender, EventArgs e)
+        {
+            if (lsbJarmuvek.SelectedIndex != -1)
+            {
+                FrmJarmuvek dialogus = new FrmJarmuvek((Jarmu)lsbJarmuvek.SelectedItem, true);
+                dialogus.ShowDialog();
+            }
+        }
+
+        private void btnModJarmu_Click(object sender, EventArgs e)
+        {
+            if (lsbJarmuvek.SelectedIndex != -1)
+            {
+                FrmJarmuvek dialogus = new FrmJarmuvek((Jarmu)lsbJarmuvek.SelectedItem);
+                if (dialogus.ShowDialog() == DialogResult.OK)
+                {
+                    lista.RemoveAt(lsbJarmuvek.SelectedIndex);
+                    lista.Insert(lsbJarmuvek.SelectedIndex, dialogus.UjJarmu);
+                    LsbRefresh();
+                }
+            }
+        }
     }
 }

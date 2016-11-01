@@ -1,21 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Modulzaro
 {
-    enum Aramellatas
-    {
-        Áramszedő,
-        Sin
-    }
 
+    enum AramellatasTipusok
+    {
+        [Description("1. Típus - Áramszedő")]
+        Áramszedő,
+        [Description("2. Típus - Sín")]
+        Sín
+    }
     abstract class Kotottpalyas : Jarmu
     {
         private int sinszelesseg;
-        private Aramellatas aramellatas;
+        private AramellatasTipusok aramellatas;
 
         public int Sinszelesseg
         {
@@ -37,7 +40,7 @@ namespace Modulzaro
             }
         }
 
-        internal Aramellatas Aramellatas
+        internal AramellatasTipusok Aramellatas
         {
             get
             {
@@ -50,10 +53,10 @@ namespace Modulzaro
             }
         }
 
-        public Kotottpalyas(string nev, string azonosito, int futottKm, int ajtokSzama, int ferohelyekSzama, int sinszelesseg, Aramellatas aramellatas) : base(nev, azonosito, futottKm, ajtokSzama, ferohelyekSzama)
+        public Kotottpalyas(string nev, string azonosito, int futottKm, int ajtokSzama, int ferohelyekSzama, int sinszelesseg, AramellatasTipusok aramellatas) : base(nev, azonosito, futottKm, ajtokSzama, ferohelyekSzama)
         {
-            this.sinszelesseg = sinszelesseg;
-            this.aramellatas = aramellatas;
+            Sinszelesseg = sinszelesseg;
+            Aramellatas = aramellatas;
         }
 
         public override float AktualisAr()

@@ -41,6 +41,10 @@ namespace Modulzaro
 
         public override float AktualisAr()
         {
+            if (FutottKm == 0)
+            {
+                return 0F;
+            }
             return (1 / FutottKm) * (FerohelyekSzama + AjtokSzama);
         }
 

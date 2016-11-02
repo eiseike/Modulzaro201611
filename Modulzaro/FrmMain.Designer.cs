@@ -43,6 +43,7 @@
             this.lsbJarmuvek.Name = "lsbJarmuvek";
             this.lsbJarmuvek.Size = new System.Drawing.Size(222, 264);
             this.lsbJarmuvek.TabIndex = 0;
+            this.lsbJarmuvek.DoubleClick += new System.EventHandler(this.lsbJarmuvek_DoubleClick);
             // 
             // btnSzures
             // 

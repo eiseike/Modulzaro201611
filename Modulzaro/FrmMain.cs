@@ -20,13 +20,16 @@ namespace Modulzaro
         {
             InitializeComponent();
             lista = new SajatLista<Jarmu>();
+            this.Text = "";
         }
 
+        
         private void btnUjJarmu_Click(object sender, EventArgs e)
         {
             FrmJarmuvek dialogus = new FrmJarmuvek(); 
             if (dialogus.ShowDialog() == DialogResult.OK)
             {
+                lista.Hozzaadas += titleJarmuHozzaadva;
                 lista.Add(dialogus.UjJarmu);
                 LsbRefresh();
             }
@@ -42,10 +45,21 @@ namespace Modulzaro
             }
         }
 
+        private void titleJarmuTorolve(Jarmu jarmu)
+        {
+            this.Text = "Törölve: "+jarmu;
+        }
+
+        private void titleJarmuHozzaadva(Jarmu jarmu)
+        {
+            this.Text = "Hozzáadva: " + jarmu;
+        }
+
         private void btnTorolJarmu_Click(object sender, EventArgs e)
         {
             if (lsbJarmuvek.SelectedIndex != -1 && MessageBox.Show("Valóban törölni szeretné a kiválasztott terméket?", "Törlés...", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
             {
+                lista.Elvetel += titleJarmuTorolve;
                 lista.RemoveAt(lsbJarmuvek.SelectedIndex , lsbJarmuvek.SelectedItem as Jarmu);
                 LsbRefresh();
             }
@@ -81,6 +95,15 @@ namespace Modulzaro
                     lista.Insert(lsbJarmuvek.SelectedIndex, dialogus.UjJarmu);
                     LsbRefresh();
                 }
+            }
+        }
+
+        private void lsbJarmuvek_DoubleClick(object sender, EventArgs e)
+        {
+            if (lsbJarmuvek.SelectedIndex != -1 && lsbJarmuvek.SelectedItem is Kotottpalyas)
+            {
+                KotottpalyasJellemzok dialogus = new KotottpalyasJellemzok((Jarmu)lsbJarmuvek.SelectedItem);
+                dialogus.ShowDialog();
             }
         }
     }

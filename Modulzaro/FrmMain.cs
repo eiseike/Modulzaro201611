@@ -21,6 +21,7 @@ namespace Modulzaro
             InitializeComponent();
             lista = new SajatLista<Jarmu>();
             this.Text = "";
+            LogKezeles.LogNyitas();
         }
 
         
@@ -30,6 +31,7 @@ namespace Modulzaro
             if (dialogus.ShowDialog() == DialogResult.OK)
             {
                 lista.Hozzaadas += titleJarmuHozzaadva;
+                LogKezeles.LogIras(LogKezelesFunkcio.Létrehozás, dialogus.UjJarmu);
                 lista.Add(dialogus.UjJarmu);
                 LsbRefresh();
             }
@@ -60,12 +62,13 @@ namespace Modulzaro
             if (lsbJarmuvek.SelectedIndex != -1 && MessageBox.Show("Valóban törölni szeretné a kiválasztott terméket?", "Törlés...", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
             {
                 lista.Elvetel += titleJarmuTorolve;
+                LogKezeles.LogIras(LogKezelesFunkcio.Törlés, lsbJarmuvek.SelectedItem as Jarmu);
                 lista.RemoveAt(lsbJarmuvek.SelectedIndex , lsbJarmuvek.SelectedItem as Jarmu);
                 LsbRefresh();
             }
         }
 
-        private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
+        private void FrmMain_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (
                 MessageBox.Show("Valóban ki akar lépni?", "Kilépés...", MessageBoxButtons.OKCancel,
@@ -73,12 +76,14 @@ namespace Modulzaro
             {
                 e.Cancel = true;
             }
+            LogKezeles.LogZaras();
         }
 
         private void btnShowJarmu_Click(object sender, EventArgs e)
         {
             if (lsbJarmuvek.SelectedIndex != -1)
             {
+                LogKezeles.LogIras(LogKezelesFunkcio.Megjelenítés, lsbJarmuvek.SelectedItem as Jarmu);
                 FrmJarmuvek dialogus = new FrmJarmuvek((Jarmu)lsbJarmuvek.SelectedItem, true);
                 dialogus.ShowDialog();
             }
@@ -91,6 +96,7 @@ namespace Modulzaro
                 FrmJarmuvek dialogus = new FrmJarmuvek((Jarmu)lsbJarmuvek.SelectedItem);
                 if (dialogus.ShowDialog() == DialogResult.OK)
                 {
+                    LogKezeles.LogIras(LogKezelesFunkcio.Módosítás, lsbJarmuvek.SelectedItem as Jarmu);
                     lista.RemoveAt(lsbJarmuvek.SelectedIndex);
                     lista.Insert(lsbJarmuvek.SelectedIndex, dialogus.UjJarmu);
                     LsbRefresh();

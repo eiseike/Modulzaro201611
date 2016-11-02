@@ -70,6 +70,7 @@
     <Compile Include="LancoltLista.cs" />
     <Compile Include="LancoltListaBejaro.cs" />
     <Compile Include="LancoltListaElem.cs" />
+    <Compile Include="LogKezeles.cs" />
     <Compile Include="Metro.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

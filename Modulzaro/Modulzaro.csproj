@@ -59,6 +59,12 @@
     <Compile Include="FrmMain.Designer.cs">
       <DependentUpon>FrmMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmSzures.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmSzures.Designer.cs">
+      <DependentUpon>FrmSzures.cs</DependentUpon>
+    </Compile>
     <Compile Include="Jarmu.cs" />
     <Compile Include="Kotottpalyas.cs" />
     <Compile Include="KotottpalyasJellemzok.cs">
@@ -81,6 +87,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmMain.resx">
       <DependentUpon>FrmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmSzures.resx">
+      <DependentUpon>FrmSzures.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="KotottpalyasJellemzok.resx">
       <DependentUpon>KotottpalyasJellemzok.cs</DependentUpon>

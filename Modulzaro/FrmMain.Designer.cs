@@ -53,6 +53,7 @@
             this.btnSzures.TabIndex = 14;
             this.btnSzures.Text = "Szűrés";
             this.btnSzures.UseVisualStyleBackColor = true;
+            this.btnSzures.Click += new System.EventHandler(this.btnSzures_Click);
             // 
             // btnTorolJarmu
             // 

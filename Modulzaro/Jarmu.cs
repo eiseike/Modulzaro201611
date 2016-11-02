@@ -170,5 +170,21 @@ namespace Modulzaro
             }
         }
 
+
+
+        public static List<Jarmu> Szures(SajatLista<Jarmu> jarmuvek, EldontoFuggvenyTarolo eldontes)
+        {
+            List<Jarmu> szurtLista = new List<Jarmu>();
+            foreach (Jarmu item in jarmuvek)
+            {
+                if (eldontes(item))
+                {
+                    szurtLista.Add(item);
+                }
+            }
+            return szurtLista;
+        }
+
+
     }
 }

@@ -112,5 +112,11 @@ namespace Modulzaro
                 dialogus.ShowDialog();
             }
         }
+
+        private void btnSzures_Click(object sender, EventArgs e)
+        {
+            frmSzures dialogus = new frmSzures(lista);
+            dialogus.ShowDialog();
+        }
     }
 }

@@ -30,7 +30,7 @@ namespace Modulzaro
                 betu = "M";
             }
 
-            labelNev.Text = jarmu.Nev;
+            labelNev.Text = jarmu.GyartoNev;
             labelAzonosito.Text = jarmu.Azonosito;
             labelFutottKm.Text = jarmu.FutottKm.ToString();
             labelAjtokSzama.Text = jarmu.AjtokSzama.ToString();

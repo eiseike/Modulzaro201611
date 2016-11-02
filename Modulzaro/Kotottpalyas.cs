@@ -53,7 +53,7 @@ namespace Modulzaro
             }
         }
 
-        public Kotottpalyas(string nev, string azonosito, int futottKm, int ajtokSzama, int ferohelyekSzama, int sinszelesseg, AramellatasTipusok aramellatas) : base(nev, azonosito, futottKm, ajtokSzama, ferohelyekSzama)
+        public Kotottpalyas(string gyartoNev, string azonosito, int futottKm, int ajtokSzama, int ferohelyekSzama, int sinszelesseg, AramellatasTipusok aramellatas) : base(gyartoNev, azonosito, futottKm, ajtokSzama, ferohelyekSzama)
         {
             Sinszelesseg = sinszelesseg;
             Aramellatas = aramellatas;

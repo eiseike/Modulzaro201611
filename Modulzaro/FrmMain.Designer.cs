@@ -34,6 +34,7 @@
             this.btnUjJarmu = new System.Windows.Forms.Button();
             this.btnShowJarmu = new System.Windows.Forms.Button();
             this.btnModJarmu = new System.Windows.Forms.Button();
+            this.btnKereses = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lsbJarmuvek
@@ -95,11 +96,22 @@
             this.btnModJarmu.UseVisualStyleBackColor = true;
             this.btnModJarmu.Click += new System.EventHandler(this.btnModJarmu_Click);
             // 
+            // btnKereses
+            // 
+            this.btnKereses.Location = new System.Drawing.Point(11, 480);
+            this.btnKereses.Name = "btnKereses";
+            this.btnKereses.Size = new System.Drawing.Size(224, 30);
+            this.btnKereses.TabIndex = 14;
+            this.btnKereses.Text = "Keresés";
+            this.btnKereses.UseVisualStyleBackColor = true;
+            this.btnKereses.Click += new System.EventHandler(this.btnKereses_Click);
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(255, 478);
+            this.ClientSize = new System.Drawing.Size(255, 543);
+            this.Controls.Add(this.btnKereses);
             this.Controls.Add(this.btnSzures);
             this.Controls.Add(this.btnModJarmu);
             this.Controls.Add(this.btnShowJarmu);
@@ -121,6 +133,7 @@
         private System.Windows.Forms.Button btnUjJarmu;
         private System.Windows.Forms.Button btnShowJarmu;
         private System.Windows.Forms.Button btnModJarmu;
+        private System.Windows.Forms.Button btnKereses;
     }
 }
 

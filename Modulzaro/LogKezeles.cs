@@ -91,10 +91,10 @@ namespace Modulzaro
 
             }
 
-            logfile.WriteLine(DateTime.Now + separator + jarmuTipusString + " " + mitortenik + separator + encode(jarmuKiirando.Nev) + separator + encode(jarmuKiirando.Azonosito));
+            logfile.WriteLine(DateTime.Now + separator + jarmuTipusString + " " + mitortenik + separator + encode(jarmuKiirando.GyartoNev) + separator + encode(jarmuKiirando.Azonosito));
 
             MessageBox.Show(DateTime.Now + separator + jarmuTipusString + " " + mitortenik + separator +
-                            encode(jarmuKiirando.Nev) + separator + encode(jarmuKiirando.Azonosito));
+                            encode(jarmuKiirando.GyartoNev) + separator + encode(jarmuKiirando.Azonosito));
 
             
         }

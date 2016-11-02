@@ -229,7 +229,7 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(150, 22);
             this.label4.TabIndex = 23;
-            this.label4.Text = "Ajt;ok száma";
+            this.label4.Text = "Ajtók száma";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label3
@@ -314,7 +314,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(150, 22);
             this.label1.TabIndex = 15;
-            this.label1.Text = "Gyártó és típus";
+            this.label1.Text = "Gyártó neve";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // nudFerohelyekSzama
@@ -413,7 +413,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(427, 651);
+            this.ClientSize = new System.Drawing.Size(427, 534);
             this.Controls.Add(this.buttonCANCEL);
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.groupBoxMetro);

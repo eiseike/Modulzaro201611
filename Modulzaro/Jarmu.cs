@@ -24,28 +24,28 @@ namespace Modulzaro
 
     abstract class Jarmu : IComparable
     {
-        private string nev;
+        private string gyartoNev;
         private string azonosito;
         private int futottKm;
         private int ajtokSzama;
         private int ferohelyekSzama;
 
-        public string Nev
+        public string GyartoNev
         {
             get
             {
-                return nev;
+                return gyartoNev;
             }
 
             set
             {
                 if (value.Trim() == "")
                 {
-                    throw new ArgumentException("Nem adott meg nevet!");
+                    throw new ArgumentException("Nem adott meg gyártó nevet!");
                 }
                 else
                 {
-                   nev = value;    
+                   gyartoNev = value;    
                 }
             }
         }
@@ -133,9 +133,9 @@ namespace Modulzaro
             }
         }
     
-        public Jarmu(string nev, string azonosito, int futottKm, int ajtokSzama, int ferohelyekSzama)
+        public Jarmu(string gyartoNev, string azonosito, int futottKm, int ajtokSzama, int ferohelyekSzama)
         {
-            Nev = nev;
+            GyartoNev = gyartoNev;
             Azonosito = azonosito;
             FutottKm = futottKm;
             AjtokSzama = ajtokSzama;
@@ -147,7 +147,7 @@ namespace Modulzaro
 
         public override string ToString()
         {
-            return nev + " - " + azonosito;
+            return gyartoNev + " - " + azonosito;
         }
 
         public int CompareTo(object obj)

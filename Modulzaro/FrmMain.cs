@@ -14,7 +14,6 @@ namespace Modulzaro
     {
        
         SajatLista<Jarmu> lista;
-        Image ikon;
 
         public FrmMain()
         {
@@ -116,6 +115,18 @@ namespace Modulzaro
         private void btnSzures_Click(object sender, EventArgs e)
         {
             frmSzures dialogus = new frmSzures(lista);
+            dialogus.ShowDialog();
+        }
+
+        private void btnKereses_Click(object sender, EventArgs e)
+        {
+            LancoltLista<Jarmu> lancoltLista = new LancoltLista<Jarmu>();
+            foreach (Jarmu jarmu in lista)
+            {
+                lancoltLista.Beszur(jarmu);
+            }
+
+            FrmKereso dialogus = new FrmKereso(lancoltLista);
             dialogus.ShowDialog();
         }
     }

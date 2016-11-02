@@ -32,7 +32,7 @@ namespace Modulzaro
             }
         }
 
-        public Busz(string nev, string azonosito, int futottKm, int ajtokSzama, int ferohelyekSzama, int tankUrtartalom, bool hibrid, bool csuklos) : base(nev, azonosito, futottKm, ajtokSzama, ferohelyekSzama)
+        public Busz(string gyartoNev, string azonosito, int futottKm, int ajtokSzama, int ferohelyekSzama, int tankUrtartalom, bool hibrid, bool csuklos) : base(gyartoNev, azonosito, futottKm, ajtokSzama, ferohelyekSzama)
         {
             TankUrtartalom = tankUrtartalom;
             Hibrid = hibrid;

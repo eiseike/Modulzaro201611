@@ -39,7 +39,7 @@ namespace Modulzaro
         {
             _init();
             UjJarmu = jarmu;
-            txtNev.Text = UjJarmu.Nev;
+            txtNev.Text = UjJarmu.GyartoNev;
             txtAzonosito.Text = UjJarmu.Azonosito;
             nudFutottKM.Value = UjJarmu.FutottKm;
             nudAjtokSzama.Value = UjJarmu.AjtokSzama;

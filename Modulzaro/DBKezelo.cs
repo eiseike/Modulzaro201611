@@ -4,6 +4,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Modulzaro
 {
@@ -39,32 +40,75 @@ namespace Modulzaro
             }
         }
 
-        //public static List<Jarmu> Query()
-        //{
-        //    try
-        //    {
-        //        command.CommandText = "SELECT * FROM [Jarmu] INNER JOIN [Eszkoz] ON [Jarmu].[Cikkszam] = [Eszkoz].[Cikkszam]";
-        //        SqlDataReader reader = command.ExecuteReader();
-        //        List<Jarmu> Jarmuk = new List<Jarmu>();
-        //        while (reader.Read())
-        //        {
-        //            Jarmuk.Add(new Eszkoz(reader["Cikkszam"].ToString(), reader["Megnevezes"].ToString(), (int)reader["Ar"], ((byte)reader["Nagygep"]) == 1, (EszkozTipus)(int)reader["Tipus"]));
-        //        }
-        //        reader.Close();
-        //        command.CommandText = "SELECT * FROM [Jarmu] INNER JOIN [Segedanyag] ON [Jarmu].[Cikkszam] = [Segedanyag].[Cikkszam]";
-        //        reader = command.ExecuteReader();
-        //        while (reader.Read())
-        //        {
-        //            Jarmuk.Add(new Segedanyag(reader["Cikkszam"].ToString(), reader["Megnevezes"].ToString(), (int)reader["Ar"], (SegedanyagTipus)(int)reader["Tipus"]));
-        //        }
-        //        reader.Close();
-        //        return Jarmuk;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw new DBKivetel("Sikertelen lekérdezés!", ex.Message);
-        //    }
-        //}
+        public static SajatLista<Jarmu> Query()
+        {
+            try
+            {
+                SajatLista<Jarmu> Jarmuvek = new SajatLista<Jarmu>();
+                SqlDataReader reader;
+
+                //Buszok
+                command.CommandText = "SELECT * FROM [Jarmu] INNER JOIN [Busz] ON [Jarmu].[Azonosito] = [Busz].[Azonosito]";
+                reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    Jarmuvek.Add(new Busz(
+                        reader["GyartoNev"].ToString(),
+                        reader["Azonosito"].ToString(),
+                        (int)reader["FutottKm"],
+                        (int)reader["AjtokSzama"],
+                        (int)reader["FerohelyekSzama"],
+                        (int)reader["TankUrtartalom"],
+                        (bool)reader["Hibrid"],
+                        (bool)reader["Csuklos"]
+                    ));
+                }
+                reader.Close();
+
+                //Villamosok  
+                command.CommandText = "SELECT* FROM[Jarmu] INNER JOIN[Kotottpalyas] ON[Jarmu].[Azonosito] = [Kotottpalyas].[Azonosito] INNER JOIN[Villamos] ON[Jarmu].[Azonosito] = [Villamos].[Azonosito]";
+                reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    Jarmuvek.Add(new Villamos(
+                        reader["GyartoNev"].ToString(),
+                        reader["Azonosito"].ToString(),
+                        (int)reader["FutottKm"],
+                        (int)reader["AjtokSzama"],
+                        (int)reader["FerohelyekSzama"],
+                        (int)reader["Sinszelesseg"],
+                        (AramellatasTipusok)(Int16.Parse(reader["Aramellatas"].ToString())), 
+                        (bool)reader["EgybeNyitott"]
+                    ));
+                }
+                reader.Close();
+
+                //Metrók  
+                command.CommandText = "SELECT* FROM[Jarmu] INNER JOIN[Kotottpalyas] ON[Jarmu].[Azonosito] = [Kotottpalyas].[Azonosito] INNER JOIN[Metro] ON[Jarmu].[Azonosito] = [Metro].[Azonosito]";
+                reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    Jarmuvek.Add(new Metro(
+                        reader["GyartoNev"].ToString(),
+                        reader["Azonosito"].ToString(),
+                        (int)reader["FutottKm"],
+                        (int)reader["AjtokSzama"],
+                        (int)reader["FerohelyekSzama"],
+                        (int)reader["Sinszelesseg"],
+                         (AramellatasTipusok)(Int16.Parse(reader["Aramellatas"].ToString())),
+                        (int)reader["Szerelveny"]
+                    ));
+
+                }
+                reader.Close();
+
+                return Jarmuvek;
+            }
+            catch (Exception ex)
+            {
+                throw new DBKivetel("Sikertelen lekérdezés!", ex.Message);
+            }
+        }
 
         public static void InsertToDatabase(Jarmu _new)
         {
@@ -75,7 +119,7 @@ namespace Modulzaro
                 {
                     if (_new is Kotottpalyas)
                     {
-                        command.CommandText = String.Format("INSERT INTO [Kotottpalyas] VALUES ('{0}', '{1}', '{2}')", _new.Azonosito, (_new as Kotottpalyas).Sinszelesseg, (_new as Kotottpalyas).Aramellatas);
+                        command.CommandText = String.Format("INSERT INTO [Kotottpalyas] VALUES ('{0}', '{1}', '{2}')", _new.Azonosito, (_new as Kotottpalyas).Sinszelesseg, (int)(_new as Kotottpalyas).Aramellatas);
                         command.ExecuteNonQuery();
 
                         if (_new is Villamos)
@@ -138,10 +182,10 @@ namespace Modulzaro
         //    }
         //}
 
-        //public static List<DBHiba> BulkInsertFromXml(List<Jarmu> _Jarmuk)
+        //public static List<DBHiba> BulkInsertFromXml(List<Jarmu> _Jarmuvek)
         //{
         //    List<DBHiba> hibak = new List<DBHiba>();
-        //    foreach (var item in _Jarmuk)
+        //    foreach (var item in _Jarmuvek)
         //    {
         //        try
         //        {

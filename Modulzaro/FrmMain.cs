@@ -41,11 +41,21 @@ namespace Modulzaro
         private void LsbRefresh()
         {
 
-            lsbJarmuvek.Items.Clear();
-            foreach (Jarmu item in lista)
+            //lsbJarmuvek.Items.Clear();
+            //foreach (Jarmu item in lista)
+            //{
+            //    lsbJarmuvek.Items.Add(item);
+            //}
+
+            try
             {
-                lsbJarmuvek.Items.Add(item);
+                lsbJarmuvek.DataSource = DBKezelo.Query();
             }
+            catch (DBKivetel ex)
+            {
+                MessageBox.Show(ex.Message, "Hiba...", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
         }
 
         private void titleJarmuTorolve(Jarmu jarmu)

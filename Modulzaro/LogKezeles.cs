@@ -26,16 +26,13 @@ namespace Modulzaro
         {
             string filename = "jarmuvek_log.csv";
             logfile = new StreamWriter(filename);
-            logfile.WriteLine("****************************************");
-            logfile.WriteLine("Programfutás kezdete: " + DateTime.Now);
-            logfile.WriteLine("****************************************");
+            logfile.WriteLine(DateTime.Now + separator + "START");
+
         }
 
         public static void LogZaras()
         {
-            logfile.WriteLine("****************************************");
-            logfile.WriteLine("Programfutás vége: " + DateTime.Now);
-            logfile.WriteLine("****************************************");
+            logfile.WriteLine(DateTime.Now + separator + "STOP");
             logfile.Close();
         }
 
@@ -93,8 +90,7 @@ namespace Modulzaro
 
             logfile.WriteLine(DateTime.Now + separator + jarmuTipusString + " " + mitortenik + separator + encode(jarmuKiirando.GyartoNev) + separator + encode(jarmuKiirando.Azonosito));
 
-            MessageBox.Show(DateTime.Now + separator + jarmuTipusString + " " + mitortenik + separator +
-                            encode(jarmuKiirando.GyartoNev) + separator + encode(jarmuKiirando.Azonosito));
+            //MessageBox.Show(DateTime.Now + separator + jarmuTipusString + " " + mitortenik + separator + encode(jarmuKiirando.GyartoNev) + separator + encode(jarmuKiirando.Azonosito));
 
             
         }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
 
 namespace Modulzaro
 {
@@ -75,6 +77,16 @@ namespace Modulzaro
             {
                 e.Cancel = true;
             }
+
+            try
+            {
+                DBKezelo.ConnectionClose();
+            }
+            catch (DBKivetel ex)
+            {
+                MessageBox.Show(ex.Message, "Hiba...", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
             LogKezeles.LogZaras();
         }
 
@@ -128,6 +140,21 @@ namespace Modulzaro
 
             FrmKereso dialogus = new FrmKereso(lancoltLista);
             dialogus.ShowDialog();
+        }
+
+        private void FrmMain_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                DBKezelo.ConnectionOpen(ConfigurationManager.ConnectionStrings["Modulzaro.Properties.Settings.masterConnectionString"].ConnectionString);
+                LsbRefresh();
+            }
+            catch (DBKivetel ex)
+            {
+                MessageBox.Show(ex.Message, "Hiba...", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.FormClosing -= FrmMain_FormClosing;
+                Close();
+            }
         }
     }
 }

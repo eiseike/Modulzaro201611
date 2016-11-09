@@ -35,7 +35,7 @@ namespace Modulzaro
 
         }
 
-        internal FrmJarmuvek(Jarmu jarmu, bool leselkedem=false)
+        internal FrmJarmuvek(Jarmu jarmu, bool leselkedem = false)
         {
             _init();
             UjJarmu = jarmu;
@@ -44,7 +44,7 @@ namespace Modulzaro
             nudFutottKM.Value = UjJarmu.FutottKm;
             nudAjtokSzama.Value = UjJarmu.AjtokSzama;
             nudFerohelyekSzama.Value = UjJarmu.FerohelyekSzama;
-            
+
             if (UjJarmu is Busz)
             {
                 cmbJarmuKategoria.SelectedIndex = (int)JarmuTipusok.Busz;
@@ -76,7 +76,7 @@ namespace Modulzaro
                     itemControl.Enabled = false;
                 }
             }
-            
+
         }
 
         private void _init()
@@ -100,44 +100,52 @@ namespace Modulzaro
             cmbAramellatasTipusa.ValueMember = "value";
         }
 
-        
+
         private void btnOK_Click(object sender, EventArgs e)
         {
 
             try
             {
-               
 
-                switch ((JarmuTipusok) cmbJarmuKategoria.SelectedIndex)
+
+                switch ((JarmuTipusok)cmbJarmuKategoria.SelectedIndex)
                 {
                     case JarmuTipusok.Busz:
                         //Busz
-                        UjJarmu = new Busz(txtNev.Text.Trim(), txtAzonosito.Text.Trim(), (int) (nudFutottKM.Value),
-                            (int) (nudAjtokSzama.Value), (int) (nudFerohelyekSzama.Value),
-                            (int) (nudTankUrtartalom.Value), cboHibrid.Checked, cboCsuklos.Checked);
+                        UjJarmu = new Busz(txtNev.Text.Trim(), txtAzonosito.Text.Trim(), (int)(nudFutottKM.Value),
+                            (int)(nudAjtokSzama.Value), (int)(nudFerohelyekSzama.Value),
+                            (int)(nudTankUrtartalom.Value), cboHibrid.Checked, cboCsuklos.Checked);
 
+                        DBKezelo.InsertToDatabase(UjJarmu);
                         break;
                     case JarmuTipusok.Villamos:
                         //Villamos
                         UjJarmu = new Villamos(
-                            txtNev.Text.Trim(), txtAzonosito.Text.Trim(), (int) (nudFutottKM.Value),
-                            (int) (nudAjtokSzama.Value), (int) (nudFerohelyekSzama.Value),
-                            (int) (nudSinszelesseg.Value), (AramellatasTipusok)cmbAramellatasTipusa.SelectedIndex,
+                            txtNev.Text.Trim(), txtAzonosito.Text.Trim(), (int)(nudFutottKM.Value),
+                            (int)(nudAjtokSzama.Value), (int)(nudFerohelyekSzama.Value),
+                            (int)(nudSinszelesseg.Value), (AramellatasTipusok)cmbAramellatasTipusa.SelectedIndex,
                             cboEgybeNyitott.Checked);
+                        DBKezelo.InsertToDatabase(UjJarmu);
                         break;
                     case JarmuTipusok.Metró:
                         //Metró
-                        UjJarmu = new Metro(txtNev.Text.Trim(), txtAzonosito.Text.Trim(), (int) (nudFutottKM.Value),
-                            (int) (nudAjtokSzama.Value), (int) (nudFerohelyekSzama.Value),
-                            (int) (nudSinszelesseg.Value), (AramellatasTipusok)cmbAramellatasTipusa.SelectedIndex,
-                            (int) nudSzerelveny.Value);
+                        UjJarmu = new Metro(txtNev.Text.Trim(), txtAzonosito.Text.Trim(), (int)(nudFutottKM.Value),
+                            (int)(nudAjtokSzama.Value), (int)(nudFerohelyekSzama.Value),
+                            (int)(nudSinszelesseg.Value), (AramellatasTipusok)cmbAramellatasTipusa.SelectedIndex,
+                            (int)nudSzerelveny.Value);
+                        DBKezelo.InsertToDatabase(UjJarmu);
                         break;
                 }
-               
+
             }
             catch (ArgumentException ex)
             {
                 MessageBox.Show(ex.Message, "Hiba...", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                DialogResult = DialogResult.None;
+            }
+            catch (DBKivetel ex)
+            {
+                MessageBox.Show(ex.EredetiUzenet, "Hiba...", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 DialogResult = DialogResult.None;
             }
         }

@@ -13,6 +13,7 @@ namespace Modulzaro
 
     public partial class FrmJarmuvek : Form
     {
+        private bool update;
         private Jarmu ujJarmu;
 
         internal Jarmu UjJarmu
@@ -32,6 +33,7 @@ namespace Modulzaro
         {
             _init();
             UjJarmu = null;
+            update = false;
 
         }
 
@@ -39,11 +41,13 @@ namespace Modulzaro
         {
             _init();
             UjJarmu = jarmu;
+            update = true;
             txtNev.Text = UjJarmu.GyartoNev;
             txtAzonosito.Text = UjJarmu.Azonosito;
             nudFutottKM.Value = UjJarmu.FutottKm;
             nudAjtokSzama.Value = UjJarmu.AjtokSzama;
             nudFerohelyekSzama.Value = UjJarmu.FerohelyekSzama;
+            txtAzonosito.Enabled = false;          
 
             if (UjJarmu is Busz)
             {
@@ -116,7 +120,6 @@ namespace Modulzaro
                             (int)(nudAjtokSzama.Value), (int)(nudFerohelyekSzama.Value),
                             (int)(nudTankUrtartalom.Value), cboHibrid.Checked, cboCsuklos.Checked);
 
-                        DBKezelo.InsertToDatabase(UjJarmu);
                         break;
                     case JarmuTipusok.Villamos:
                         //Villamos
@@ -125,7 +128,7 @@ namespace Modulzaro
                             (int)(nudAjtokSzama.Value), (int)(nudFerohelyekSzama.Value),
                             (int)(nudSinszelesseg.Value), (AramellatasTipusok)cmbAramellatasTipusa.SelectedIndex,
                             cboEgybeNyitott.Checked);
-                        DBKezelo.InsertToDatabase(UjJarmu);
+                       
                         break;
                     case JarmuTipusok.Metró:
                         //Metró
@@ -133,8 +136,16 @@ namespace Modulzaro
                             (int)(nudAjtokSzama.Value), (int)(nudFerohelyekSzama.Value),
                             (int)(nudSinszelesseg.Value), (AramellatasTipusok)cmbAramellatasTipusa.SelectedIndex,
                             (int)nudSzerelveny.Value);
-                        DBKezelo.InsertToDatabase(UjJarmu);
+                        
                         break;
+                }
+                if (update)
+                {
+                    DBKezelo.ModifyToDatabase(UjJarmu);
+                }
+                else
+                {
+                    DBKezelo.InsertToDatabase(UjJarmu);
                 }
 
             }

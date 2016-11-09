@@ -149,54 +149,63 @@ namespace Modulzaro
             }
         }
 
-        //public static void ModifyToDatabase(Jarmu _modify)
-        //{
-        //    try
-        //    {
-        //        command.CommandText = String.Format("UPDATE [Jarmu] SET [Megnevezes] = '{0}', [Ar] = '{1}' WHERE [Cikkszam] = '{2}'", _modify.Megnevezes, _modify.Ar, _modify.Cikkszam);
-        //        command.ExecuteNonQuery();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw new DBKivetel("Sikertelen módosítás!", ex.Message);
-        //    }
-        //}
+        public static void ModifyToDatabase(Jarmu _modify)
+        {
+            try
+            {
+                command.CommandText = String.Format("UPDATE [Jarmu] SET [GyartoNev]= '{1}', [FutottKm] = '{2}', [AjtokSzama]='{3}', [FerohelyekSzama]='{4}' WHERE [Azonosito]={0}", _modify.Azonosito, _modify.GyartoNev, _modify.FutottKm, _modify.AjtokSzama, _modify.FerohelyekSzama);
+                if (command.ExecuteNonQuery() == 1)
+                {
+                    if (_modify is Kotottpalyas)
+                    {
+                        command.CommandText = String.Format("UPDATE [Kotottpalyas] SET [Sinszelesseg] = '{1}', [Aramellatas] = '{2}'  WHERE [Azonosito]={0}", _modify.Azonosito, (_modify as Kotottpalyas).Sinszelesseg, (int)(_modify as Kotottpalyas).Aramellatas);
+                        command.ExecuteNonQuery();
 
-        //public static void DeleteFromDatabase(Jarmu _delete)
-        //{
-        //    try
-        //    {
-        //        if (_delete is Eszkoz)
-        //        {
-        //            command.CommandText = String.Format("DELETE FROM [Jarmu] WHERE [Cikkszam] = '{0}'; DELETE FROM [Eszkoz] WHERE [Cikkszam] = '{0}'", _delete.Cikkszam);
-        //        }
-        //        else
-        //        {
-        //            command.CommandText = String.Format("DELETE FROM [Jarmu] WHERE [Cikkszam] = '{0}'; DELETE FROM [Segedanyag] WHERE [Cikkszam] = '{0}'", _delete.Cikkszam);
-        //        }
-        //        command.ExecuteNonQuery();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw new DBKivetel("Sikertelen törlés!", ex.Message);
-        //    }
-        //}
+                        if (_modify is Villamos)
+                        {
+                            command.CommandText = String.Format("UPDATE [Villamos] SET [EgybeNyitott] = '{1}'  WHERE [Azonosito]={0}", _modify.Azonosito, (_modify as Villamos).EgybeNyitott);
 
-        //public static List<DBHiba> BulkInsertFromXml(List<Jarmu> _Jarmuvek)
-        //{
-        //    List<DBHiba> hibak = new List<DBHiba>();
-        //    foreach (var item in _Jarmuvek)
-        //    {
-        //        try
-        //        {
-        //            InsertToDatabase(item);
-        //        }
-        //        catch (DBKivetel)
-        //        {
-        //            hibak.Add(new DBHiba("Sikertelen csoportos beszúrás!", item));
-        //        }
-        //    }
-        //    return hibak;
-        //}
+                        }
+                        else if (_modify is Metro)
+                        {
+                            command.CommandText = String.Format("UPDATE [Metro] SET [Szerelveny] = '{1}'  WHERE [Azonosito]={0}", _modify.Azonosito, (_modify as Metro).Szerelveny);
+
+                        }
+                        command.ExecuteNonQuery();
+
+                    }
+                    else if (_modify is Busz)
+                    {
+                        command.CommandText = String.Format("UPDATE [Busz] SET [TankUrtartalom] = '{1}', [Hibrid]='{2}', [Csuklos]='{3}'  WHERE [Azonosito]={0}", _modify.Azonosito, (_modify as Busz).TankUrtartalom, (_modify as Busz).Hibrid, (_modify as Busz).Csuklos);
+                        command.ExecuteNonQuery();
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new DBKivetel("Sikertelen beszúrás!", ex.Message);
+            }
+        }
+
+        public static void DeleteFromDatabase(Jarmu _delete)
+        {
+            try
+            {
+                command.CommandText = String.Format(
+                    "DELETE FROM [Jarmu] WHERE [Azonosito] = '{0}';"+
+                    "DELETE FROM [Kotottpalyas] WHERE [Azonosito] = '{0}';"+
+                    "DELETE FROM [Villamos] WHERE [Azonosito] = '{0}';"+
+                    "DELETE FROM [Metro] WHERE [Azonosito] = '{0}';"+
+                    "DELETE FROM [Busz] WHERE [Azonosito] = '{0}';", _delete.Azonosito);
+                command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new DBKivetel("Sikertelen törlés!", ex.Message);
+            }
+        }
+
+
     }
 }

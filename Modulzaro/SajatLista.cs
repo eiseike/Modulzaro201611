@@ -23,7 +23,7 @@ namespace Modulzaro
        
         public void RemoveAt(int index, object jarmu)
         {   
-            base.RemoveAt(index);
+            //base.RemoveAt(index);
             Elvetel?.Invoke((Jarmu)jarmu);
         }
 

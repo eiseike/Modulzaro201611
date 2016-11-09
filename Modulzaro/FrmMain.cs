@@ -72,6 +72,15 @@ namespace Modulzaro
         {
             if (lsbJarmuvek.SelectedIndex != -1 && MessageBox.Show("Valóban törölni szeretné a kiválasztott terméket?", "Törlés...", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
             {
+               
+                try
+                {
+                    DBKezelo.DeleteFromDatabase((Jarmu)lsbJarmuvek.SelectedItem);
+                }
+                catch (DBKivetel ex)
+                {
+                    MessageBox.Show(ex.Message, "Hiba...", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
                 lista.Elvetel += titleJarmuTorolve;
                 LogKezeles.LogIras(LogKezelesFunkcio.Törlés, lsbJarmuvek.SelectedItem as Jarmu);
                 lista.RemoveAt(lsbJarmuvek.SelectedIndex , lsbJarmuvek.SelectedItem as Jarmu);

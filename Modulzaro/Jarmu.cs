@@ -83,9 +83,9 @@ namespace Modulzaro
 
             set
             {
-                if (value < 0)
+                if (value < 1)
                 {
-                    throw new ArgumentException("A futott kliométer legalább 0 kell hogy legyen!");
+                    throw new ArgumentException("A futott kliométer legalább 1 kell hogy legyen!");
                 }
                 else
                 {

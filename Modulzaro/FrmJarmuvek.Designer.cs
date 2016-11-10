@@ -289,9 +289,19 @@
             0,
             0,
             0});
+            this.nudFutottKM.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.nudFutottKM.Name = "nudFutottKM";
             this.nudFutottKM.Size = new System.Drawing.Size(239, 20);
             this.nudFutottKM.TabIndex = 3;
+            this.nudFutottKM.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // txtAzonosito
             // 

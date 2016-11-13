@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Modulzaro
 {
@@ -43,7 +44,7 @@ namespace Modulzaro
         {
             if (szint != null)
             {
-                if (szint.Ertek.CompareTo(elem) == 0)
+                  if (szint.Ertek.CompareTo(elem) == 0)
                 {
                     return true;
                 }

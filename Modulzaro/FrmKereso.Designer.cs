@@ -28,27 +28,27 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.txtKeresoKeresettSzoveg = new System.Windows.Forms.TextBox();
+            this.btnKeresoOK = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // textBox1
+            // txtKeresoKeresettSzoveg
             // 
-            this.textBox1.Location = new System.Drawing.Point(106, 9);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(211, 20);
-            this.textBox1.TabIndex = 0;
+            this.txtKeresoKeresettSzoveg.Location = new System.Drawing.Point(106, 9);
+            this.txtKeresoKeresettSzoveg.Name = "txtKeresoKeresettSzoveg";
+            this.txtKeresoKeresettSzoveg.Size = new System.Drawing.Size(211, 20);
+            this.txtKeresoKeresettSzoveg.TabIndex = 0;
             // 
-            // button1
+            // btnKeresoOK
             // 
-            this.button1.Location = new System.Drawing.Point(323, 8);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Keresés";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnKeresoOK.Location = new System.Drawing.Point(323, 8);
+            this.btnKeresoOK.Name = "btnKeresoOK";
+            this.btnKeresoOK.Size = new System.Drawing.Size(75, 23);
+            this.btnKeresoOK.TabIndex = 1;
+            this.btnKeresoOK.Text = "Keresés";
+            this.btnKeresoOK.UseVisualStyleBackColor = true;
+            this.btnKeresoOK.Click += new System.EventHandler(this.button1_Click);
             // 
             // label1
             // 
@@ -65,8 +65,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(428, 50);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.btnKeresoOK);
+            this.Controls.Add(this.txtKeresoKeresettSzoveg);
             this.Name = "FrmKereso";
             this.Text = "FrmKereso";
             this.ResumeLayout(false);
@@ -76,8 +76,8 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox txtKeresoKeresettSzoveg;
+        private System.Windows.Forms.Button btnKeresoOK;
         private System.Windows.Forms.Label label1;
     }
 }

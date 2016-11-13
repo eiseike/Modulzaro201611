@@ -167,7 +167,7 @@ namespace Modulzaro
             {
                 command.CommandText =
                     String.Format(
-                        "UPDATE [Jarmu] SET [GyartoNev]= '{1}', [FutottKm] = '{2}', [AjtokSzama]='{3}', [FerohelyekSzama]='{4}' WHERE [Azonosito]={0}",
+                        "UPDATE [Jarmu] SET [GyartoNev]= '{1}', [FutottKm] = '{2}', [AjtokSzama]='{3}', [FerohelyekSzama]='{4}' WHERE [Azonosito]='{0}'",
                         _modify.Azonosito, _modify.GyartoNev, _modify.FutottKm, _modify.AjtokSzama,
                         _modify.FerohelyekSzama);
                 if (command.ExecuteNonQuery() == 1)
@@ -176,7 +176,7 @@ namespace Modulzaro
                     {
                         command.CommandText =
                             String.Format(
-                                "UPDATE [Kotottpalyas] SET [Sinszelesseg] = '{1}', [Aramellatas] = '{2}'  WHERE [Azonosito]={0}",
+                                "UPDATE [Kotottpalyas] SET [Sinszelesseg] = '{1}', [Aramellatas] = '{2}'  WHERE [Azonosito]='{0}'",
                                 _modify.Azonosito, (_modify as Kotottpalyas).Sinszelesseg,
                                 (int) (_modify as Kotottpalyas).Aramellatas);
                         command.ExecuteNonQuery();
@@ -184,13 +184,13 @@ namespace Modulzaro
                         if (_modify is Villamos)
                         {
                             command.CommandText =
-                                String.Format("UPDATE [Villamos] SET [EgybeNyitott] = '{1}'  WHERE [Azonosito]={0}",
+                                String.Format("UPDATE [Villamos] SET [EgybeNyitott] = '{1}'  WHERE [Azonosito]='{0}'",
                                     _modify.Azonosito, (_modify as Villamos).EgybeNyitott);
                         }
                         else if (_modify is Metro)
                         {
                             command.CommandText =
-                                String.Format("UPDATE [Metro] SET [Szerelveny] = '{1}'  WHERE [Azonosito]={0}",
+                                String.Format("UPDATE [Metro] SET [Szerelveny] = '{1}'  WHERE [Azonosito]='{0}'",
                                     _modify.Azonosito, (_modify as Metro).Szerelveny);
                         }
                         command.ExecuteNonQuery();
@@ -199,7 +199,7 @@ namespace Modulzaro
                     {
                         command.CommandText =
                             String.Format(
-                                "UPDATE [Busz] SET [TankUrtartalom] = '{1}', [Hibrid]='{2}', [Csuklos]='{3}'  WHERE [Azonosito]={0}",
+                                "UPDATE [Busz] SET [TankUrtartalom] = '{1}', [Hibrid]='{2}', [Csuklos]='{3}'  WHERE [Azonosito]='{0}'",
                                 _modify.Azonosito, (_modify as Busz).TankUrtartalom, (_modify as Busz).Hibrid,
                                 (_modify as Busz).Csuklos);
                         command.ExecuteNonQuery();
@@ -216,7 +216,7 @@ namespace Modulzaro
             }
             catch (Exception ex)
             {
-                throw new DBKivetel("Sikertelen beszúrás!", ex.Message);
+                throw new DBKivetel(command.CommandText, ex.Message);
             }
         }
 

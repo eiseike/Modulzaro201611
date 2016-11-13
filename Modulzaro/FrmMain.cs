@@ -50,6 +50,7 @@ namespace Modulzaro
             try
             {
                 lsbJarmuvek.DataSource = DBKezelo.Query();
+                lista = DBKezelo.Query();
             }
             catch (DBKivetel ex)
             {
@@ -126,9 +127,7 @@ namespace Modulzaro
                 FrmJarmuvek dialogus = new FrmJarmuvek((Jarmu)lsbJarmuvek.SelectedItem);
                 if (dialogus.ShowDialog() == DialogResult.OK)
                 {
-                    LogKezeles.LogIras(LogKezelesFunkcio.Módosítás, lsbJarmuvek.SelectedItem as Jarmu);
-                    lista.RemoveAt(lsbJarmuvek.SelectedIndex);
-                    lista.Insert(lsbJarmuvek.SelectedIndex, dialogus.UjJarmu);
+                    LogKezeles.LogIras(LogKezelesFunkcio.Módosítás, lsbJarmuvek.SelectedItem as Jarmu);;
                     LsbRefresh();
                 }
             }
@@ -152,8 +151,19 @@ namespace Modulzaro
         private void btnKereses_Click(object sender, EventArgs e)
         {
             LancoltLista<Jarmu> lancoltLista = new LancoltLista<Jarmu>();
+
+            try
+            {
+                lista = DBKezelo.Query();
+            }
+            catch (DBKivetel ex)
+            {
+                MessageBox.Show(ex.Message, "Hiba...", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
             foreach (Jarmu jarmu in lista)
             {
+                //MessageBox.Show(jarmu.GyartoNev);
                 lancoltLista.Beszur(jarmu);
             }
 

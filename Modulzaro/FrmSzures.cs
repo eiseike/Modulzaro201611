@@ -21,31 +21,31 @@ namespace Modulzaro
         {
             InitializeComponent();
             this.Jarmuvek = Jarmuvek;
-            comboBox1.SelectedIndex = 0;
+            cmbSzuresSzurofeltetel.SelectedIndex = 0;
         }
 
         private bool FutottKmSzures(Jarmu Jarmu)
         {
-            return numericUpDown1.Value <= Jarmu.FutottKm;
+            return nudSzuresFutottKm.Value <= Jarmu.FutottKm;
         }
 
         private bool FerohelyekSzamaSzures(Jarmu Jarmu)
         {
-            return numericUpDown2.Value >= Jarmu.FerohelyekSzama;
+            return nudSzuresFerohely.Value >= Jarmu.FerohelyekSzama;
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (comboBox1.SelectedIndex == 0)
+            if (cmbSzuresSzurofeltetel.SelectedIndex == 0)
             {
-                numericUpDown1.Enabled = true;
-                numericUpDown2.Enabled = false;
+                nudSzuresFutottKm.Enabled = true;
+                nudSzuresFerohely.Enabled = false;
                 fv = FutottKmSzures;
             }
             else
             {
-                numericUpDown1.Enabled = false;
-                numericUpDown2.Enabled = true;
+                nudSzuresFutottKm.Enabled = false;
+                nudSzuresFerohely.Enabled = true;
                 fv = FerohelyekSzamaSzures;
             }
         }

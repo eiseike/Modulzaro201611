@@ -157,7 +157,7 @@ namespace Modulzaro
             }
             catch (DBKivetel ex)
             {
-                MessageBox.Show(ex.EredetiUzenet, "Hiba...", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message+Environment.NewLine+ex.EredetiUzenet, "Hiba...", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 DialogResult = DialogResult.None;
             }
         }
